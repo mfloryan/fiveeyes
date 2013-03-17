@@ -1,24 +1,37 @@
-function drawCirclePath(context, x, y, radius) {
-    context.beginPath();
-    context.arc(x, y, radius, 0, Math.PI * 2, false);
-    context.closePath();
-}
-function DrawCircle(context, x, y, radius) {
-    drawCirclePath(context, x, y, radius);
-    context.strokeStyle = "#eee";
-    context.stroke();
-}
+function Draw(canvasContext) {
 
-function DrawFilledCircle(context, x, y, radius) {
-    drawCirclePath(context, x, y, radius);
-    context.fillStyle = "#eee";
-    context.fill();
+    var context = canvasContext;
+
+    function circlePath(x, y, radius) {
+        context.beginPath();
+        context.arc(x, y, radius, 0, Math.PI * 2, false);
+        context.closePath();
+    }
+
+    return {
+        circle: function(x, y, radius) {
+            circlePath(x, y, radius);
+            context.strokeStyle = "#eee";
+            context.stroke();
+        },
+
+        filledCircle: function (x, y, radius) {
+            circlePath(x, y, radius);
+            context.fillStyle = "#eee";
+            context.fill();
+        },
+
+        clearRectangle: function(x, y, dx, dy) {
+            context.clearRect(x,y,dx,dy);
+        }
+    };
 }
 
 function drawEyesHandler(context, canvasLocation, width, height) {
 
     var eyeSize = 20;
     var pupilSize = 6;
+    var draw = new Draw(context);
 
     function getMouseEyeOffsetLambda(canvasLocation) {
         return function(offset, mouseCoordinates, eyeXoffset, eyeYoffset) {
@@ -38,8 +51,8 @@ function drawEyesHandler(context, canvasLocation, width, height) {
     var getMouseEyeOffsets = getMouseEyeOffsetLambda(canvasLocation);
 
     function drawEye(dx, ddx, ddy) {
-        DrawCircle(context, eyeSize + dx, eyeSize, eyeSize);
-        DrawFilledCircle(context, eyeSize + dx + ddx, eyeSize - ddy, pupilSize);
+        draw.circle(eyeSize + dx, eyeSize, eyeSize);
+        draw.filledCircle(eyeSize + dx + ddx, eyeSize - ddy, pupilSize);
     }
 
     function drawEyes(mouseCoordinates, offset) {
@@ -52,7 +65,7 @@ function drawEyesHandler(context, canvasLocation, width, height) {
     }
 
     return function(event) {
-        context.clearRect(0,0,80,80);
+        draw.clearRectangle(0,0, 80, 80);
         drawEyes({x:event.pageX, y:event.pageY}, 10);
     }
 }
