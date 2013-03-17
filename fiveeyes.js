@@ -11,13 +11,13 @@ function Draw(canvasContext) {
     return {
         circle: function(x, y, radius) {
             circlePath(x, y, radius);
-            context.strokeStyle = "#eee";
+            context.strokeStyle = "#123";
             context.stroke();
         },
 
         filledCircle: function (x, y, radius) {
             circlePath(x, y, radius);
-            context.fillStyle = "#eee";
+            context.fillStyle = "#123";
             context.fill();
         },
 
