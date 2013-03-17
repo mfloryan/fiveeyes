@@ -72,11 +72,11 @@ function drawEyesHandler(context, canvasLocation, width, height) {
 
 $(function() {
     var eyeCanvas = document.getElementById("eyecanvas");
-    var eyeDiv = $('#eyes');
+    var wrappedCanvas = $(eyeCanvas);
     var context = eyeCanvas.getContext("2d");
     $('html').on('mousemove',drawEyesHandler(
         context,
-        $(eyeCanvas).offset(),
-        eyeDiv.width(),
-        eyeDiv.height()));
+        $('#eyes').offset(),
+        wrappedCanvas.width(),
+        wrappedCanvas.height()));
 });
