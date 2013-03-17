@@ -59,8 +59,8 @@ function drawEyesHandler(context, canvasLocation, width, height) {
 
         draw.clearRectangle(0,0, 80, 80);
 
-        var offsets1 = getMouseEyeOffsets(offset, mouseCoordinates, eyeSize / 2, eyeSize / 2);
-        var offsets2 = getMouseEyeOffsets(offset, mouseCoordinates, eyeSize, eyeSize / 2);
+        var offsets1 = getMouseEyeOffsets(offset, mouseCoordinates, eyeSize, eyeSize);
+        var offsets2 = getMouseEyeOffsets(offset, mouseCoordinates, 3 * eyeSize, eyeSize);
 
         drawEye(0, offsets1.dx, offsets1.dy);
         drawEye(2 * eyeSize, offsets2.dx, offsets2.dy);
