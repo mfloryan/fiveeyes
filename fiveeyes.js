@@ -1,3 +1,33 @@
+function Point(x, y) {
+    return {
+        x: x,
+        y: y
+    }
+}
+
+function EyesLayout(canvasOffset) {
+
+    function EyeLayout(position) {
+        var position = position;
+
+        return {
+            position: position
+        }
+    }
+
+    var eyeSize = 10;
+    var leftEye = new EyeLayout(new Point(0,0));
+    var rightEye = new EyeLayout(new Point(eyeSize,0));
+
+    return {
+        setEyeSize: function(size) {
+            eyeSize = size;
+        },
+        leftEye: leftEye,
+        rightEye: rightEye
+    };
+}
+
 function Draw(canvasContext) {
 
     var context = canvasContext;
